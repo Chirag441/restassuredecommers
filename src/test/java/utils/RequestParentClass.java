@@ -10,19 +10,27 @@ import java.io.*;
 import java.util.Properties;
 
 public class RequestParentClass  {
-
+    BaseConext base;
     String baseurl ;
     String id ;
     LoginRequest loginRequest;
     AddProduct addProduct;
-    LoginResponse loginResponse;
+
  AddProductResponse addProductResponse ;
     String password;
     PrintStream log = null;
     Properties prop = null;
     String filePath = "//src//test//resources//global.properties";
     FileInputStream fis = null;
-    ObjecFiles objecFiles;
+  public   ObjecFiles objecFiles;
+
+
+    public RequestParentClass(BaseConext base)
+    {
+        this.base = base;
+        setObjecFiles(base.objecFiles);
+        setup();
+    }
 
     public void setObjecFiles(ObjecFiles objecFiles) {
         this.objecFiles = objecFiles;
@@ -34,7 +42,6 @@ public class RequestParentClass  {
     {
         loginRequest = objecFiles.getLoginRequest();
         addProduct = objecFiles.getAddProduct();
-        loginResponse= objecFiles.getLoginResponse();
         addProductResponse = objecFiles.getAddProductResponse();
     }
 

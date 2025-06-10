@@ -12,6 +12,18 @@ public class ObjecFiles {
     LoginResponse loginResponse;
     AddProductResponse addProductResponse;
 
+    public void setAddProductResponse(AddProductResponse addProductResponse) {
+        this.addProductResponse = addProductResponse;
+    }
+
+
+
+    public void setLoginResponse(LoginResponse loginResponse) {
+        this.loginResponse = loginResponse;
+    }
+
+
+
     public AddProductResponse getAddProductResponse() {
         return addProductResponse;
     }
@@ -24,12 +36,15 @@ public class ObjecFiles {
     }
 
     public LoginRequest getLoginRequest() {
-        loginRequest = new LoginRequest();
+        if(loginRequest == null) {
+            loginRequest = new LoginRequest();
+        }
         return loginRequest;
     }
 
     public LoginResponse getLoginResponse() {
-        loginResponse = new LoginResponse();
+
+        System.out.println("object file called");
         return loginResponse;
     }
 

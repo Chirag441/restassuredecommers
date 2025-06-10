@@ -5,6 +5,7 @@ import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
+import pojoclasses.LoginResponse;
 
 import java.io.File;
 
@@ -14,15 +15,14 @@ import static io.restassured.RestAssured.given;
 public class Request extends RequestParentClass {
 public static RequestSpecification baseRequest, addProductAPI,loginAPI,deleteProductAPI;//loginRequest;
 
-    public Request()
+    public Request(BaseConext base) {
+        super(base);
 
-    {
-     //super();
-     //   setUserDetails();
-     loadFile();
+        loadFile();
      loadLogFile();
-     baseRequestSpecification();
-}
+  baseRequestSpecification();
+    }
+
 
 
 public RequestSpecification baseRequestSpecification()
@@ -32,7 +32,6 @@ public RequestSpecification baseRequestSpecification()
       baseRequest =new RequestSpecBuilder().setBaseUri(baseurl)
               .addFilter(RequestLoggingFilter.logRequestTo(log))
               .addFilter(ResponseLoggingFilter.logResponseTo(log))
-              //.setContentType(ContentType.JSON)
               .build();
   }
 
@@ -59,16 +58,10 @@ public RequestSpecification  addProductAPI()
     if(addProductAPI ==null)
     {
 
-//        addProduct  = new RequestSpecBuilder().setBaseUri(baseurl)
-//                .addHeader("Authorization",token)
-//                .setContentType(ContentType.MULTIPART)
-//                .addFilter(RequestLoggingFilter.logRequestTo(log))
-//                .addFilter(ResponseLoggingFilter.logResponseTo(log))
-//                .build();
-
+        LoginResponse  loginResponse = objecFiles.getLoginResponse();
+        System.out.println("object created");
 
         addProduct.loadProductDetails(loginResponse.getUserId());
-        System.out.println("token="+ loginResponse.getToken());
         addProductAPI = given().spec(baseRequestSpecification())
                 .header("Authorization",loginResponse.getToken())
                 .contentType(ContentType.MULTIPART)
@@ -86,8 +79,10 @@ public RequestSpecification  addProductAPI()
 }
     public RequestSpecification  deleteProductAPI()
     {
+
+        addProductResponse = objecFiles.getAddProductResponse();
         if(deleteProductAPI ==null)
-        {
+        {LoginResponse  loginResponse = objecFiles.getLoginResponse();
 
             deleteProductAPI = given().spec(baseRequestSpecification())
                     .header("Authorization",loginResponse.getToken())
