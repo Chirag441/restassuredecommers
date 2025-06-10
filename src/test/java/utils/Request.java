@@ -12,19 +12,20 @@ import static io.restassured.RestAssured.given;
 
 
 public class Request extends RequestParentClass {
-    public static RequestSpecification baseRequest, addProductAPI, loginAPI, deleteProductAPI;//loginRequest;
+    public static   RequestSpecification baseRequest;
+    public  RequestSpecification        addProductAPI, loginAPI, deleteProductAPI;//loginRequest;
 
 
     public Request() {
-        loadFile();
-        loadLogFile();
+
         baseRequestSpecification();
     }
 
 
     public RequestSpecification baseRequestSpecification() {
         if (baseRequest == null) {
-
+            loadFile();
+            loadLogFile();
             baseRequest = new RequestSpecBuilder().setBaseUri(baseurl)
                     .addFilter(RequestLoggingFilter.logRequestTo(log))
                     .addFilter(ResponseLoggingFilter.logResponseTo(log))
