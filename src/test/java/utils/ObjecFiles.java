@@ -7,46 +7,29 @@ import pojoclasses.LoginResponse;
 
 public class ObjecFiles {
 
-    AddProduct addProduct;
-    LoginRequest loginRequest;
-    LoginResponse loginResponse;
-    AddProductResponse addProductResponse;
+     public static   AddProduct addProduct;
+    public static LoginRequest loginRequest;
+    public static LoginResponse loginResponse;
+    public static AddProductResponse addProductResponse;
 
-    public void setAddProductResponse(AddProductResponse addProductResponse) {
-        this.addProductResponse = addProductResponse;
+
+    public ObjecFiles()
+    {
+        getLoginRequest();
+        getAddProduct();
     }
 
 
 
-    public void setLoginResponse(LoginResponse loginResponse) {
-        this.loginResponse = loginResponse;
+    public void getLoginRequest() {
+
+           loginRequest = new LoginRequest();
+
     }
 
 
-
-    public AddProductResponse getAddProductResponse() {
-        return addProductResponse;
-    }
-
-
-    public AddProduct getAddProduct() {
+    public void getAddProduct() {
         addProduct = new AddProduct();
 
-        return addProduct;
     }
-
-    public LoginRequest getLoginRequest() {
-        if(loginRequest == null) {
-            loginRequest = new LoginRequest();
-        }
-        return loginRequest;
-    }
-
-    public LoginResponse getLoginResponse() {
-
-        System.out.println("object file called");
-        return loginResponse;
-    }
-
-
 }

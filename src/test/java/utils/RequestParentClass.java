@@ -1,6 +1,6 @@
 package utils;
 
-import StepDefination.Resource;
+//import StepDefination.Resource;
 import pojoclasses.AddProduct;
 import pojoclasses.AddProductResponse;
 import pojoclasses.LoginRequest;
@@ -9,46 +9,15 @@ import pojoclasses.LoginResponse;
 import java.io.*;
 import java.util.Properties;
 
-public class RequestParentClass  {
-    BaseConext base;
+public class RequestParentClass extends ObjecFiles   {
+
     String baseurl ;
     String id ;
-    LoginRequest loginRequest;
-    AddProduct addProduct;
-
- AddProductResponse addProductResponse ;
     String password;
     PrintStream log = null;
     Properties prop = null;
     String filePath = "//src//test//resources//global.properties";
     FileInputStream fis = null;
-  public   ObjecFiles objecFiles;
-
-
-    public RequestParentClass(BaseConext base)
-    {
-        this.base = base;
-        setObjecFiles(base.objecFiles);
-        setup();
-    }
-
-    public void setObjecFiles(ObjecFiles objecFiles) {
-        this.objecFiles = objecFiles;
-
-    }
-
-
-    public void setup()
-    {
-        loginRequest = objecFiles.getLoginRequest();
-        addProduct = objecFiles.getAddProduct();
-        addProductResponse = objecFiles.getAddProductResponse();
-    }
-
-
-
-
-
 
 
     protected void setUserDetails()
@@ -70,7 +39,7 @@ public class RequestParentClass  {
     }
 
     public  String setUserId() {
-        return prop.getProperty("id");
+        return prop.getProperty("email");
     }
 
     public  String setPassword(){
@@ -80,7 +49,7 @@ public class RequestParentClass  {
 
 
 
-    void loadLogFile()
+    protected void loadLogFile()
     {
         baseurl = getBaseURI();
 
@@ -91,7 +60,7 @@ public class RequestParentClass  {
         }
     }
 
-    void loadFile()
+     protected void loadFile()
     {
         try {
             fis = new FileInputStream(System.getProperty("user.dir") + filePath);
